@@ -2,7 +2,7 @@
   "name": "brokerdocs",
   "displayName": "BrokerDocs — Markdown con marca, Word y PDF",
   "description": "Vista previa de Markdown con tu marca (logo, colores, fuentes), edición rápida, diagramas, imágenes y adjuntos, y exportación a Word y PDF. Liviana y sin navegador incluido.",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "publisher": "gmbeas",
   "license": "MIT",
   "icon": "images/icon.png",
@@ -39,7 +39,7 @@
     "build": "node build.mjs",
     "watch": "node build.mjs --watch",
     "typecheck": "tsc -p .",
-    "package": "npm run typecheck && npm run build && vsce package --no-dependencies",
+    "package": "npm run typecheck && npm run build && vsce package --no-dependencies --baseContentUrl https://github.com/gmbeas/BrokerDocs/blob/main/extension --baseImagesUrl https://raw.githubusercontent.com/gmbeas/BrokerDocs/main/extension",
     "vscode:prepublish": "npm run build"
   },
   "contributes": {

@@ -1,5 +1,8 @@
 # Cambios
 
+## 2.0.1
+- Corrige el ícono y los enlaces del README en la página del Marketplace.
+
 ## 2.0.0
 - Nuevo nombre: **BrokerDocs** (antes Folio). Comandos y ajustes pasan a `brokerdocs.*`.
 - Ícono nuevo.
