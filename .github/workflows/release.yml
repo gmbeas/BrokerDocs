@@ -1,18 +1,20 @@
 name: release
 
-# Publica una release cuando cambia la versión de extension/package.json en main
-# (o al subir un tag vX.Y.Z, o a mano desde la pestaña Actions).
+# Al hacer push a main con una versión nueva en extension/package.json:
+#   1) compila y empaqueta el .vsix
+#   2) crea la release de GitHub con el .vsix
+#   3) publica en el Marketplace de VS Code con Trusted Publishing (OIDC, sin tokens)
 on:
   push:
     branches: [main]
-    tags: ['v*']
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: write   # crear la release
+  id-token: write   # Trusted Publishing del Marketplace
 
 jobs:
-  build:
+  release:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -21,7 +23,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           cache: npm
           cache-dependency-path: extension/package-lock.json
       - run: npm ci
@@ -30,15 +32,37 @@ jobs:
       - name: Verificar que el CLI del plugin está actualizado
         run: git diff --exit-code -- ../plugin || (echo "::error::Ejecuta 'npm run build' en extension/ y sube plugin/ actualizado" && exit 1)
 
-      - name: Publicar release si la versión es nueva
+      - name: Versión
+        id: v
+        run: |
+          echo "version=$(node -p "require('./package.json').version")" >> "$GITHUB_OUTPUT"
+          echo "id=$(node -p "const p=require('./package.json'); p.publisher + '.' + p.name")" >> "$GITHUB_OUTPUT"
+
+      - name: Release de GitHub
         env:
           GH_TOKEN: ${{ github.token }}
+          VERSION: v${{ steps.v.outputs.version }}
         run: |
-          VERSION="v$(node -p "require('./package.json').version")"
           if gh release view "$VERSION" >/dev/null 2>&1; then
             echo "La release $VERSION ya existe: se actualiza el .vsix"
             gh release upload "$VERSION" brokerdocs-*.vsix --clobber
           else
             NOTES=$(awk '/^## /{n++} n==1' CHANGELOG.md)
             gh release create "$VERSION" brokerdocs-*.vsix --target "$GITHUB_SHA" --title "BrokerDocs ${VERSION#v}" --notes "$NOTES"
+          fi
+
+      - name: Marketplace de VS Code
+        shell: bash   # bash -eo pipefail: un fallo de vsce no queda oculto tras el tee
+        env:
+          VERSION: ${{ steps.v.outputs.version }}
+          EXT_ID: ${{ steps.v.outputs.id }}
+        run: |
+          PUBLISHED=$( (npx vsce show "$EXT_ID" --json 2>/dev/null || true) | node -e "let s='';process.stdin.on('data',d=>s+=d).on('end',()=>{try{console.log(JSON.parse(s).versions[0].version)}catch{console.log('')}})")
+          if [ "$PUBLISHED" = "$VERSION" ]; then
+            echo "El Marketplace ya tiene la versión $VERSION"
+          else
+            echo "Marketplace: '${PUBLISHED:-sin publicar}' -> $VERSION"
+            if ! npx vsce publish --oidc --packagePath brokerdocs-$VERSION.vsix 2>&1 | tee publish.log; then
+              grep -qi "already exists" publish.log && echo "La versión $VERSION ya estaba publicada" || exit 1
+            fi
           fi
