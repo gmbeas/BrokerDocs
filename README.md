@@ -5,6 +5,8 @@
 
 ---
 
+<p align="center"><img src="extension/images/demo/demo.gif" alt="BrokerDocs en VS Code" width="900"></p>
+
 Escribe en Markdown y obtén documentos con logo, colores, fuentes, encabezado, pie y diagramas, sin plantillas de Word ni pasos manuales. El mismo motor funciona en tres lugares:
 
 | | Para qué |

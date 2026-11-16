@@ -2,6 +2,8 @@
 
 <img src="images/icon.png" width="96" alt="BrokerDocs">
 
+![Escribe a la izquierda, mira el documento con tu marca a la derecha y exporta a Word](images/demo/demo.gif)
+
 **Escribe en Markdown y obtén documentos con la identidad de tu empresa.** BrokerDocs es una vista previa para VS Code que aplica tu logo, colores y fuentes en vivo, y exporta a Word y PDF con un clic, sin plantillas ni pasos manuales.
 
 ## Funciones
@@ -18,6 +20,20 @@
   - **PDF**: usa el Chrome o Edge que ya tienes instalado; no se descarga ningún navegador.
   - **HTML autónomo**: un solo archivo con las imágenes incluidas, listo para enviar.
 - **Doble clic** en la vista lleva a esa línea en el editor; el desplazamiento del editor y la vista va sincronizado.
+
+## Capturas
+
+**Código y vista lado a lado, con tu marca.**
+![Vista dividida](images/demo/01-vista.png)
+
+**Selección sincronizada:** al marcar en la vista se selecciona en el código, y viceversa.
+![Selección sincronizada](images/demo/02-sincronizado.png)
+
+**Diagramas de flujo con los colores de tu marca**, también en Word y PDF.
+![Diagramas](images/demo/03-diagrama.png)
+
+**Editor visual de marca:** colores, paletas, logo y fuentes con vista previa.
+![Editor de marca](images/demo/04-marca.png)
 
 ## Tu marca en 30 segundos
 

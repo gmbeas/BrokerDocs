@@ -2,7 +2,7 @@
   "name": "brokerdocs",
   "displayName": "BrokerDocs — Markdown con marca, Word y PDF",
   "description": "Vista previa de Markdown con tu marca (logo, colores, fuentes), edición rápida, diagramas, imágenes y adjuntos, y exportación a Word y PDF. Liviana y sin navegador incluido.",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "publisher": "gmbeas",
   "license": "MIT",
   "icon": "images/icon.png",

@@ -1,5 +1,8 @@
 # Cambios
 
+## 2.0.2
+- README con demostración animada y capturas.
+
 ## 2.0.1
 - Corrige el ícono y los enlaces del README en la página del Marketplace.
 
