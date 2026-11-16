@@ -1,7 +1,10 @@
 name: release
 
+# Publica una release cuando cambia la versión de extension/package.json en main
+# (o al subir un tag vX.Y.Z, o a mano desde la pestaña Actions).
 on:
   push:
+    branches: [main]
     tags: ['v*']
   workflow_dispatch:
 
@@ -23,10 +26,19 @@ jobs:
           cache-dependency-path: extension/package-lock.json
       - run: npm ci
       - run: npm run package
+
       - name: Verificar que el CLI del plugin está actualizado
-        run: git diff --exit-code -- ../plugin || (echo "Ejecuta 'npm run build' en extension/ y sube plugin/ actualizado" && exit 1)
-      - name: Publicar .vsix en la release
-        if: startsWith(github.ref, 'refs/tags/')
+        run: git diff --exit-code -- ../plugin || (echo "::error::Ejecuta 'npm run build' en extension/ y sube plugin/ actualizado" && exit 1)
+
+      - name: Publicar release si la versión es nueva
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh release upload "${GITHUB_REF_NAME}" brokerdocs-*.vsix --clobber || gh release create "${GITHUB_REF_NAME}" brokerdocs-*.vsix --title "${GITHUB_REF_NAME}" --notes-file CHANGELOG.md
+        run: |
+          VERSION="v$(node -p "require('./package.json').version")"
+          if gh release view "$VERSION" >/dev/null 2>&1; then
+            echo "La release $VERSION ya existe: se actualiza el .vsix"
+            gh release upload "$VERSION" brokerdocs-*.vsix --clobber
+          else
+            NOTES=$(awk '/^## /{n++} n==1' CHANGELOG.md)
+            gh release create "$VERSION" brokerdocs-*.vsix --target "$GITHUB_SHA" --title "BrokerDocs ${VERSION#v}" --notes "$NOTES"
+          fi

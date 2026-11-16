@@ -4,7 +4,7 @@
 - Nuevo nombre: **BrokerDocs** (antes Folio). Comandos y ajustes pasan a `brokerdocs.*`.
 - Ícono nuevo.
 - La marca vive en `.brokerdocs/brand.json` (se sigue leyendo `.folio/brand.json` si existe).
-- Mismo motor disponible como CLI y como plugin de Claude Code en el mismo repositorio.
+- Mismo motor disponible como CLI y como plugin en el mismo repositorio.
 
 ## 1.2.0
 - Selección sincronizada: clic o texto marcado en la vista se selecciona en el código; el cursor en el código resalta el bloque en la vista (párrafos, ítems, filas de tabla, código, diagramas).
