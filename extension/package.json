@@ -1,0 +1,512 @@
+{
+  "name": "brokerdocs",
+  "displayName": "BrokerDocs — Markdown con marca, Word y PDF",
+  "description": "Vista previa de Markdown con tu marca (logo, colores, fuentes), edición rápida, diagramas, imágenes y adjuntos, y exportación a Word y PDF. Liviana y sin navegador incluido.",
+  "version": "2.0.0",
+  "publisher": "gmbeas",
+  "license": "MIT",
+  "icon": "images/icon.png",
+  "galleryBanner": {
+    "color": "#0B1B3F",
+    "theme": "dark"
+  },
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Visualization",
+    "Formatters",
+    "Other"
+  ],
+  "keywords": [
+    "markdown",
+    "preview",
+    "word",
+    "docx",
+    "pdf",
+    "export",
+    "mermaid",
+    "branding",
+    "documentation",
+    "vista previa"
+  ],
+  "main": "./dist/extension.js",
+  "activationEvents": [
+    "onLanguage:markdown",
+    "onCustomEditor:brokerdocs.editor"
+  ],
+  "scripts": {
+    "build": "node build.mjs",
+    "watch": "node build.mjs --watch",
+    "typecheck": "tsc -p .",
+    "package": "npm run typecheck && npm run build && vsce package --no-dependencies",
+    "vscode:prepublish": "npm run build"
+  },
+  "contributes": {
+    "commands": [
+      {
+        "command": "brokerdocs.openPreview",
+        "title": "Abrir vista BrokerDocs al lado",
+        "category": "BrokerDocs",
+        "icon": "$(book)"
+      },
+      {
+        "command": "brokerdocs.openPreviewHere",
+        "title": "Abrir vista BrokerDocs aquí",
+        "category": "BrokerDocs"
+      },
+      {
+        "command": "brokerdocs.export.docx",
+        "title": "Exportar a Word (.docx)",
+        "category": "BrokerDocs",
+        "icon": "$(file)"
+      },
+      {
+        "command": "brokerdocs.export.pdf",
+        "title": "Exportar a PDF",
+        "category": "BrokerDocs",
+        "icon": "$(file-pdf)"
+      },
+      {
+        "command": "brokerdocs.export.html",
+        "title": "Exportar a HTML autónomo",
+        "category": "BrokerDocs"
+      },
+      {
+        "command": "brokerdocs.editBrand",
+        "title": "Editar marca (colores, logo, fuentes)",
+        "category": "BrokerDocs",
+        "icon": "$(symbol-color)"
+      },
+      {
+        "command": "brokerdocs.showSource",
+        "title": "Ver código al lado",
+        "category": "BrokerDocs",
+        "icon": "$(split-horizontal)"
+      },
+      {
+        "command": "brokerdocs.reopenAsBrokerDocs",
+        "title": "Abrir como documento BrokerDocs",
+        "category": "BrokerDocs",
+        "icon": "$(book)"
+      },
+      {
+        "command": "brokerdocs.swapSides",
+        "title": "Intercambiar lados (código / vista)",
+        "category": "BrokerDocs",
+        "icon": "$(arrow-swap)"
+      },
+      {
+        "command": "brokerdocs.insert.bold",
+        "title": "Negrita",
+        "category": "BrokerDocs"
+      },
+      {
+        "command": "brokerdocs.insert.italic",
+        "title": "Cursiva",
+        "category": "BrokerDocs"
+      },
+      {
+        "command": "brokerdocs.insert.strike",
+        "title": "Tachado",
+        "category": "BrokerDocs"
+      },
+      {
+        "command": "brokerdocs.insert.code",
+        "title": "Código en línea",
+        "category": "BrokerDocs"
+      },
+      {
+        "command": "brokerdocs.insert.h1",
+        "title": "Título 1",
+        "category": "BrokerDocs"
+      },
+      {
+        "command": "brokerdocs.insert.h2",
+        "title": "Título 2",
+        "category": "BrokerDocs"
+      },
+      {
+        "command": "brokerdocs.insert.h3",
+        "title": "Título 3",
+        "category": "BrokerDocs"
+      },
+      {
+        "command": "brokerdocs.insert.bullet",
+        "title": "Lista",
+        "category": "BrokerDocs"
+      },
+      {
+        "command": "brokerdocs.insert.numbered",
+        "title": "Lista numerada",
+        "category": "BrokerDocs"
+      },
+      {
+        "command": "brokerdocs.insert.task",
+        "title": "Tarea",
+        "category": "BrokerDocs"
+      },
+      {
+        "command": "brokerdocs.insert.quote",
+        "title": "Nota / callout",
+        "category": "BrokerDocs"
+      },
+      {
+        "command": "brokerdocs.insert.link",
+        "title": "Insertar enlace",
+        "category": "BrokerDocs"
+      },
+      {
+        "command": "brokerdocs.insert.image",
+        "title": "Insertar imagen",
+        "category": "BrokerDocs"
+      },
+      {
+        "command": "brokerdocs.insert.attachment",
+        "title": "Adjuntar archivo",
+        "category": "BrokerDocs"
+      },
+      {
+        "command": "brokerdocs.insert.table",
+        "title": "Insertar tabla",
+        "category": "BrokerDocs"
+      },
+      {
+        "command": "brokerdocs.insert.diagram",
+        "title": "Insertar diagrama de flujo",
+        "category": "BrokerDocs"
+      }
+    ],
+    "menus": {
+      "editor/title": [
+        {
+          "command": "brokerdocs.openPreview",
+          "when": "editorLangId == markdown && !activeCustomEditorId",
+          "group": "navigation@50"
+        },
+        {
+          "command": "brokerdocs.swapSides",
+          "when": "(activeCustomEditorId == brokerdocs.editor || activeWebviewPanelId == brokerdocs.preview || editorLangId == markdown)",
+          "group": "navigation@0"
+        },
+        {
+          "command": "brokerdocs.showSource",
+          "when": "activeCustomEditorId == brokerdocs.editor",
+          "group": "navigation@1"
+        },
+        {
+          "command": "brokerdocs.export.docx",
+          "when": "(activeCustomEditorId == brokerdocs.editor || activeWebviewPanelId == brokerdocs.preview)",
+          "group": "navigation@2"
+        },
+        {
+          "command": "brokerdocs.export.pdf",
+          "when": "(activeCustomEditorId == brokerdocs.editor || activeWebviewPanelId == brokerdocs.preview)",
+          "group": "navigation@3"
+        },
+        {
+          "command": "brokerdocs.editBrand",
+          "when": "(activeCustomEditorId == brokerdocs.editor || activeWebviewPanelId == brokerdocs.preview)",
+          "group": "navigation@4"
+        }
+      ],
+      "editor/title/context": [
+        {
+          "command": "brokerdocs.export.docx",
+          "when": "resourceLangId == markdown",
+          "group": "brokerdocs@1"
+        },
+        {
+          "command": "brokerdocs.export.pdf",
+          "when": "resourceLangId == markdown",
+          "group": "brokerdocs@2"
+        },
+        {
+          "command": "brokerdocs.reopenAsBrokerDocs",
+          "when": "resourceLangId == markdown",
+          "group": "brokerdocs@0"
+        }
+      ],
+      "editor/context": [
+        {
+          "submenu": "brokerdocs.insertMenu",
+          "when": "editorLangId == markdown",
+          "group": "1_modification@99"
+        }
+      ],
+      "brokerdocs.insertMenu": [
+        {
+          "command": "brokerdocs.insert.image",
+          "group": "1@1"
+        },
+        {
+          "command": "brokerdocs.insert.attachment",
+          "group": "1@2"
+        },
+        {
+          "command": "brokerdocs.insert.link",
+          "group": "1@3"
+        },
+        {
+          "command": "brokerdocs.insert.table",
+          "group": "2@1"
+        },
+        {
+          "command": "brokerdocs.insert.diagram",
+          "group": "2@2"
+        },
+        {
+          "command": "brokerdocs.insert.quote",
+          "group": "2@3"
+        }
+      ],
+      "explorer/context": [
+        {
+          "command": "brokerdocs.reopenAsBrokerDocs",
+          "when": "resourceLangId == markdown",
+          "group": "navigation@91"
+        },
+        {
+          "command": "brokerdocs.openPreview",
+          "when": "resourceLangId == markdown",
+          "group": "navigation@90"
+        },
+        {
+          "command": "brokerdocs.export.docx",
+          "when": "resourceLangId == markdown",
+          "group": "7_modification@90"
+        },
+        {
+          "command": "brokerdocs.export.pdf",
+          "when": "resourceLangId == markdown",
+          "group": "7_modification@91"
+        }
+      ]
+    },
+    "submenus": [
+      {
+        "id": "brokerdocs.insertMenu",
+        "label": "BrokerDocs: Insertar"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "brokerdocs.openPreview",
+        "key": "ctrl+alt+m",
+        "mac": "cmd+alt+m",
+        "when": "editorLangId == markdown"
+      },
+      {
+        "command": "brokerdocs.insert.bold",
+        "key": "ctrl+b",
+        "mac": "cmd+b",
+        "when": "editorTextFocus && editorLangId == markdown"
+      },
+      {
+        "command": "brokerdocs.insert.italic",
+        "key": "ctrl+i",
+        "mac": "cmd+i",
+        "when": "editorTextFocus && editorLangId == markdown"
+      },
+      {
+        "command": "brokerdocs.insert.link",
+        "key": "ctrl+k ctrl+l",
+        "mac": "cmd+k cmd+l",
+        "when": "editorTextFocus && editorLangId == markdown"
+      }
+    ],
+    "configuration": {
+      "title": "BrokerDocs",
+      "properties": {
+        "brokerdocs.brandFile": {
+          "type": "string",
+          "default": "",
+          "markdownDescription": "Ruta a un `brand.json` (relativa al workspace o absoluta). Si está vacío se busca `.brokerdocs/brand.json` desde la carpeta del documento hacia arriba. Es el mismo formato que usa el plugin de BrokerDocs."
+        },
+        "brokerdocs.brand": {
+          "type": "object",
+          "default": {},
+          "markdownDescription": "Marca en la configuración (sobrescribe `brand.json`). Más cómodo: comando **BrokerDocs: Editar marca**.",
+          "properties": {
+            "empresa": {
+              "type": "string"
+            },
+            "autor": {
+              "type": "string"
+            },
+            "pie": {
+              "type": "string"
+            },
+            "logo": {
+              "type": "string",
+              "description": "Ruta absoluta al logo"
+            },
+            "fuente": {
+              "type": "string"
+            },
+            "fuente_titulos": {
+              "type": "string"
+            },
+            "fuente_codigo": {
+              "type": "string"
+            },
+            "colores": {
+              "type": "object",
+              "properties": {
+                "primario": {
+                  "type": "string",
+                  "pattern": "^#?[0-9A-Fa-f]{6}$"
+                },
+                "secundario": {
+                  "type": "string",
+                  "pattern": "^#?[0-9A-Fa-f]{6}$"
+                },
+                "acento": {
+                  "type": "string",
+                  "pattern": "^#?[0-9A-Fa-f]{6}$"
+                },
+                "texto": {
+                  "type": "string",
+                  "pattern": "^#?[0-9A-Fa-f]{6}$"
+                },
+                "gris": {
+                  "type": "string",
+                  "pattern": "^#?[0-9A-Fa-f]{6}$"
+                },
+                "fondo_suave": {
+                  "type": "string",
+                  "pattern": "^#?[0-9A-Fa-f]{6}$"
+                }
+              }
+            }
+          }
+        },
+        "brokerdocs.preview.showBrandHeader": {
+          "type": "boolean",
+          "default": true,
+          "description": "Mostrar logo y nombre de la empresa sobre el documento."
+        },
+        "brokerdocs.followActiveEditor": {
+          "type": "boolean",
+          "default": true,
+          "description": "La vista cambia al Markdown activo."
+        },
+        "brokerdocs.syncScroll": {
+          "type": "boolean",
+          "default": true,
+          "description": "Sincronizar el desplazamiento del editor con la vista."
+        },
+        "brokerdocs.debounceMs": {
+          "type": "number",
+          "default": 120,
+          "minimum": 0,
+          "description": "Espera (ms) antes de actualizar la vista al escribir."
+        },
+        "brokerdocs.imagesFolder": {
+          "type": "string",
+          "default": "assets",
+          "description": "Carpeta (relativa al documento) donde se guardan las imágenes pegadas o insertadas."
+        },
+        "brokerdocs.attachmentsFolder": {
+          "type": "string",
+          "default": "adjuntos",
+          "description": "Carpeta (relativa al documento) para los adjuntos."
+        },
+        "brokerdocs.alwaysCopyFiles": {
+          "type": "boolean",
+          "default": false,
+          "description": "Copiar siempre los archivos insertados, aunque ya estén dentro del proyecto."
+        },
+        "brokerdocs.export.pageSize": {
+          "type": "string",
+          "enum": [
+            "Letter",
+            "A4"
+          ],
+          "enumDescriptions": [
+            "Carta",
+            "A4"
+          ],
+          "default": "Letter",
+          "description": "Tamaño de página para Word y PDF."
+        },
+        "brokerdocs.export.askLocation": {
+          "type": "boolean",
+          "default": true,
+          "description": "Preguntar dónde guardar al exportar (si no, se guarda junto al .md)."
+        },
+        "brokerdocs.export.browserPath": {
+          "type": "string",
+          "default": "",
+          "description": "Ruta a Chrome/Edge/Chromium para generar PDF (vacío = detección automática)."
+        },
+        "brokerdocs.sourceSide": {
+          "type": "string",
+          "enum": [
+            "left",
+            "right"
+          ],
+          "enumDescriptions": [
+            "Código a la izquierda, vista a la derecha",
+            "Vista a la izquierda, código a la derecha"
+          ],
+          "default": "left",
+          "description": "Lado donde va el código cuando BrokerDocs lo abre o intercambia."
+        },
+        "brokerdocs.selectionSync": {
+          "type": "boolean",
+          "default": true,
+          "description": "Sincronizar selección: marcar en la vista selecciona en el código y mover el cursor en el código resalta la vista."
+        }
+      }
+    },
+    "jsonValidation": [
+      {
+        "fileMatch": [
+          "**/.brokerdocs/brand.json",
+          "**/.folio/brand.json",
+          "**/brand.json"
+        ],
+        "url": "./schemas/brand.schema.json"
+      }
+    ],
+    "customEditors": [
+      {
+        "viewType": "brokerdocs.editor",
+        "displayName": "BrokerDocs (vista con marca)",
+        "selector": [
+          {
+            "filenamePattern": "*.md"
+          },
+          {
+            "filenamePattern": "*.markdown"
+          }
+        ],
+        "priority": "option"
+      }
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gmbeas/BrokerDocs"
+  },
+  "dependencies": {
+    "markdown-it": "^14.3.3",
+    "highlight.js": "^11.12.0",
+    "docx": "^9.15.4",
+    "image-size": "^1.2.1",
+    "mermaid": "^11.17.2"
+  },
+  "devDependencies": {
+    "esbuild": "^0.28.2",
+    "typescript": "^7.0.2",
+    "@types/vscode": "~1.85.0",
+    "@types/node": "^20.19.43",
+    "@types/markdown-it": "^14.2.0",
+    "@vscode/vsce": "^4.1.1"
+  },
+  "homepage": "https://github.com/gmbeas/BrokerDocs#readme",
+  "bugs": {
+    "url": "https://github.com/gmbeas/BrokerDocs/issues"
+  }
+}

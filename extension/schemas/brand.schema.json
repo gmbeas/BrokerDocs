@@ -1,0 +1,26 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Marca de BrokerDocs",
+  "type": "object",
+  "properties": {
+    "empresa": { "type": "string", "description": "Nombre que aparece en el encabezado." },
+    "autor": { "type": "string", "description": "Autor por defecto del documento." },
+    "logo": { "type": "string", "description": "Ruta al logo (PNG o JPG), relativa a este archivo." },
+    "fuente": { "type": "string", "description": "Fuente del texto.", "default": "Calibri" },
+    "fuente_titulos": { "type": "string", "description": "Fuente de los títulos.", "default": "Calibri" },
+    "fuente_codigo": { "type": "string", "description": "Fuente monoespaciada.", "default": "Consolas" },
+    "pie": { "type": "string", "description": "Texto del pie de página." },
+    "colores": {
+      "type": "object",
+      "description": "Colores en hexadecimal, sin #.",
+      "properties": {
+        "primario": { "type": "string", "pattern": "^#?[0-9A-Fa-f]{6}$", "description": "Títulos, encabezados de tabla, líneas." },
+        "secundario": { "type": "string", "pattern": "^#?[0-9A-Fa-f]{6}$", "description": "Enlaces y etiquetas." },
+        "acento": { "type": "string", "pattern": "^#?[0-9A-Fa-f]{6}$", "description": "Línea bajo el título y notas." },
+        "texto": { "type": "string", "pattern": "^#?[0-9A-Fa-f]{6}$" },
+        "gris": { "type": "string", "pattern": "^#?[0-9A-Fa-f]{6}$" },
+        "fondo_suave": { "type": "string", "pattern": "^#?[0-9A-Fa-f]{6}$", "description": "Fondo de filas alternas y notas." }
+      }
+    }
+  }
+}

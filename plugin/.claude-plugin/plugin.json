@@ -1,0 +1,10 @@
+{
+  "name": "brokerdocs",
+  "description": "Documentación con marca: avances del día, de la semana y de issues en Markdown, exportados a Word y PDF con logo, colores y diagramas.",
+  "version": "2.0.0",
+  "author": { "name": "gmbeas", "url": "https://github.com/gmbeas" },
+  "homepage": "https://github.com/gmbeas/BrokerDocs",
+  "repository": "https://github.com/gmbeas/BrokerDocs",
+  "license": "MIT",
+  "keywords": ["documentación", "markdown", "word", "docx", "pdf", "mermaid", "informes", "avances"]
+}

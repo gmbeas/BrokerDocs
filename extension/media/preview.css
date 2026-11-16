@@ -1,0 +1,32 @@
+/* BrokerDocs · interfaz del panel (barra, índice, lienzo) */
+html,body{margin:0;padding:0}
+body{background:var(--vscode-editorWidget-background,#f3f4f6);color:var(--vscode-foreground);font-family:var(--vscode-font-family)}
+#bar{position:sticky;top:0;z-index:10;display:flex;flex-wrap:wrap;align-items:center;gap:2px;padding:5px 8px;background:var(--vscode-editor-background);border-bottom:1px solid var(--vscode-panel-border,#ddd)}
+#bar button{all:unset;cursor:pointer;min-width:26px;height:26px;padding:0 6px;box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;border-radius:5px;font-size:13px;color:var(--vscode-foreground)}
+#bar button:hover{background:var(--vscode-toolbar-hoverBackground,rgba(0,0,0,.08))}
+#bar button.on{background:var(--vscode-toolbar-activeBackground,rgba(0,0,0,.14))}
+#bar .sep{width:1px;height:18px;background:var(--vscode-panel-border,#ccc);margin:0 5px}
+#bar .grow{flex:1}
+#bar .exp{font-size:12px;font-weight:600;padding:0 9px;border:1px solid var(--vscode-panel-border,#ccc)}
+#bar .stats{font-size:11px;opacity:.7;margin:0 8px;white-space:nowrap}
+#wrap{display:flex;align-items:flex-start;gap:0}
+#toc{display:none;position:sticky;top:38px;width:230px;max-height:calc(100vh - 50px);overflow:auto;padding:14px 8px 14px 14px;font-size:12px;box-sizing:border-box}
+#toc.show{display:block}
+#toc a{display:block;padding:3px 6px;border-radius:4px;color:var(--vscode-foreground);text-decoration:none;opacity:.8;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#toc a:hover{background:var(--vscode-list-hoverBackground);opacity:1}
+#toc a.l1{font-weight:700}#toc a.l3{padding-left:18px}#toc a.l4{padding-left:30px;opacity:.65}
+#toc .ttl{font-weight:700;text-transform:uppercase;font-size:10px;letter-spacing:.08em;opacity:.6;margin:0 6px 8px}
+#page{flex:1;min-width:0;padding:22px 18px 40px}
+#paper{background:#fff;max-width:920px;margin:0 auto;border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,.12),0 8px 28px rgba(0,0,0,.06);min-height:70vh}
+.brokerdocs-doc [data-line]{cursor:default}
+.brokerdocs-doc .flash{animation:flash 1.2s ease-out}
+@keyframes flash{from{background:color-mix(in srgb,var(--f-acc) 30%,transparent)}to{background:transparent}}
+#drop{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(30,64,175,.12);border:3px dashed var(--f-pri);font:600 18px var(--vscode-font-family);color:var(--f-pri);z-index:50}
+#drop.show{display:flex}
+#toast{position:fixed;bottom:16px;right:16px;padding:8px 14px;border-radius:6px;background:var(--vscode-notifications-background,#333);color:var(--vscode-notifications-foreground,#fff);font-size:12px;opacity:0;transition:opacity .2s;pointer-events:none}
+#toast.show{opacity:1}
+@media (max-width:640px){#toc{display:none!important}#page{padding:10px 6px}.brokerdocs-doc{padding:8px 18px 40px}}
+
+.brokerdocs-doc .brokerdocs-active{outline:2px solid color-mix(in srgb,var(--f-acc) 70%,transparent);outline-offset:4px;border-radius:3px;background-color:color-mix(in srgb,var(--f-acc) 7%,transparent);transition:background-color .2s}
+.brokerdocs-doc tr.brokerdocs-active td{background:color-mix(in srgb,var(--f-acc) 14%,#fff)!important}
+.brokerdocs-doc li.brokerdocs-active{outline-offset:2px}

@@ -1,0 +1,17 @@
+{
+  "name": "brokerdocs",
+  "description": "BrokerDocs: Markdown con marca, Word y PDF.",
+  "owner": {
+    "name": "gmbeas",
+    "url": "https://github.com/gmbeas"
+  },
+  "plugins": [
+    {
+      "name": "brokerdocs",
+      "source": "./plugin",
+      "description": "Redacta avances diarios, semanales y de issues, y exporta Markdown a Word/PDF con la marca del proyecto.",
+      "version": "2.0.0",
+      "category": "productivity"
+    }
+  ]
+}

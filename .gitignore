@@ -1,0 +1,11 @@
+node_modules/
+extension/dist/
+extension/media/mermaid.min.js
+*.vsix
+extension/test/out/
+extension/test/*.js
+extension/test/shell.html
+extension/test/sample/*.docx
+extension/test/sample/*.pdf
+extension/test/sample/*.html
+.DS_Store

@@ -1,0 +1,54 @@
+/* BrokerDocs · estilos de documento (vista y exportación). Las variables --f-* vienen de la marca. */
+.brokerdocs-doc{font-family:var(--f-font);color:var(--f-txt);line-height:1.6;font-size:15px;max-width:860px;margin:0 auto;padding:8px 40px 64px;word-wrap:break-word}
+.brokerdocs-doc h1,.brokerdocs-doc h2,.brokerdocs-doc h3,.brokerdocs-doc h4{font-family:var(--f-hfont);line-height:1.25;margin:1.6em 0 .5em;scroll-margin-top:56px}
+.brokerdocs-doc h1{font-size:1.9em;color:var(--f-pri)}
+.brokerdocs-doc h2{font-size:1.4em;color:var(--f-pri);padding-bottom:.25em;border-bottom:1px solid color-mix(in srgb,var(--f-pri) 18%,transparent)}
+.brokerdocs-doc h3{font-size:1.15em}.brokerdocs-doc h4{font-size:1em;color:var(--f-gray)}
+.brokerdocs-doc p,.brokerdocs-doc ul,.brokerdocs-doc ol,.brokerdocs-doc table,.brokerdocs-doc pre,.brokerdocs-doc blockquote{margin:0 0 1em}
+.brokerdocs-doc a{color:var(--f-sec);text-decoration:none;border-bottom:1px solid color-mix(in srgb,var(--f-sec) 35%,transparent)}
+.brokerdocs-doc a:hover{border-bottom-color:var(--f-sec)}
+.brokerdocs-doc a.brokerdocs-attachment::before{content:"📎 ";font-size:.9em}
+.brokerdocs-doc .brokerdocs-broken{color:#DC2626!important;border-bottom:1px dashed #DC2626!important}
+.brokerdocs-doc img.brokerdocs-broken{outline:2px dashed #DC2626;min-width:120px;min-height:40px}
+.brokerdocs-doc img{max-width:100%;border-radius:6px}
+.brokerdocs-doc code{font-family:var(--f-mono);font-size:.88em;background:color-mix(in srgb,var(--f-pri) 8%,transparent);color:var(--f-pri);padding:.12em .4em;border-radius:4px}
+.brokerdocs-doc pre.code-block{background:#F6F8FA;border:1px solid #E5E7EB;border-radius:8px;padding:14px 16px;overflow:auto;position:relative}
+.brokerdocs-doc pre.code-block code{background:none;color:#24292F;padding:0;font-size:.85em}
+.brokerdocs-doc pre.code-block[data-lang]::after{content:attr(data-lang);position:absolute;top:6px;right:10px;font-size:10px;text-transform:uppercase;color:var(--f-gray);font-family:var(--f-font)}
+.brokerdocs-doc table{border-collapse:collapse;width:100%;font-size:.93em;display:table}
+.brokerdocs-doc th{background:var(--f-pri);color:#fff;text-align:left;font-weight:600}
+.brokerdocs-doc th,.brokerdocs-doc td{padding:7px 12px;border:1px solid #E5E7EB}
+.brokerdocs-doc tr:nth-child(even) td{background:var(--f-soft)}
+.brokerdocs-doc blockquote{padding:10px 16px;border-left:4px solid var(--f-acc);background:var(--f-soft);border-radius:0 6px 6px 0}
+.brokerdocs-doc blockquote>:last-child{margin-bottom:0}
+.brokerdocs-doc blockquote[data-title]::before{content:attr(data-title);display:block;font-weight:700;font-size:.85em;text-transform:uppercase;letter-spacing:.04em;margin-bottom:4px}
+.brokerdocs-doc .callout-note{border-left-color:var(--f-sec)}.brokerdocs-doc .callout-note::before{color:var(--f-sec)}
+.brokerdocs-doc .callout-tip{border-left-color:#16A34A;background:#F0FDF4}.brokerdocs-doc .callout-tip::before{color:#16A34A}
+.brokerdocs-doc .callout-important{border-left-color:#7C3AED;background:#F5F3FF}.brokerdocs-doc .callout-important::before{color:#7C3AED}
+.brokerdocs-doc .callout-warning{border-left-color:var(--f-acc);background:#FFFBEB}.brokerdocs-doc .callout-warning::before{color:#B45309}
+.brokerdocs-doc .callout-caution{border-left-color:#DC2626;background:#FEF2F2}.brokerdocs-doc .callout-caution::before{color:#DC2626}
+.brokerdocs-doc li.task-item{list-style:none;margin-left:-1.3em}
+.brokerdocs-doc li.task-item input{margin:0 .4em 0 0;vertical-align:-1px;accent-color:var(--f-pri)}
+.brokerdocs-doc li.task-item.done{color:var(--f-gray)}
+.brokerdocs-doc hr{border:0;border-top:1px solid #E5E7EB;margin:2em 0}
+.brokerdocs-doc .mermaid-wrap{text-align:center;margin:0 0 1.2em;padding:12px;border:1px solid #EEF0F3;border-radius:8px;background:#fff}
+.brokerdocs-doc pre.mermaid{background:none;border:0;margin:0;font-family:var(--f-font);color:var(--f-gray)}
+.brokerdocs-title{margin:8px 0 28px;padding-bottom:14px;border-bottom:3px solid var(--f-acc)}
+.brokerdocs-title .kicker{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--f-sec)}
+.brokerdocs-title .doc-title{font-size:2.1em;margin:.15em 0 .2em;color:var(--f-pri);border:0}
+.brokerdocs-title .doc-info{color:var(--f-gray);font-size:.92em}
+.brokerdocs-brandbar{display:flex;align-items:center;justify-content:space-between;gap:12px;max-width:860px;margin:0 auto;padding:14px 40px 10px;border-bottom:1px solid color-mix(in srgb,var(--f-pri) 25%,transparent);color:var(--f-gray);font-size:12px;font-family:var(--f-font)}
+.brokerdocs-brandbar img{height:30px}
+/* highlight.js (claro) */
+.hljs-comment,.hljs-quote{color:#6A737D;font-style:italic}.hljs-keyword,.hljs-selector-tag,.hljs-literal{color:#D73A49}
+.hljs-string,.hljs-regexp,.hljs-addition{color:#032F62}.hljs-number,.hljs-attr,.hljs-variable,.hljs-template-variable{color:#005CC5}
+.hljs-title,.hljs-section,.hljs-function .hljs-title{color:#6F42C1}.hljs-type,.hljs-built_in,.hljs-class .hljs-title{color:#E36209}
+.hljs-meta,.hljs-tag,.hljs-name{color:#22863A}.hljs-deletion{color:#B31D28}
+/* impresión / PDF */
+@media print{
+  .brokerdocs-doc{max-width:none;padding:0;font-size:11pt}
+  .brokerdocs-doc h1,.brokerdocs-doc h2,.brokerdocs-doc h3{break-after:avoid}
+  .brokerdocs-doc pre,.brokerdocs-doc table,.brokerdocs-doc .mermaid-wrap,.brokerdocs-doc img,.brokerdocs-doc blockquote{break-inside:avoid}
+  .brokerdocs-brandbar{padding:0 0 8px;margin-bottom:14px;max-width:none}
+  .brokerdocs-doc a.brokerdocs-attachment::before{content:""}
+}
